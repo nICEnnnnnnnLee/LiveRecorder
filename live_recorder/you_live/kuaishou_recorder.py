@@ -1,6 +1,6 @@
 # coding=utf-8
 import requests
-from live_recorder._base_recorder import BaseRecorder
+from ._base_recorder import BaseRecorder
 
 class KuaishouRecorder(BaseRecorder):
 

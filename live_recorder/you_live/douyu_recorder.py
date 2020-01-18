@@ -4,13 +4,13 @@ import execjs
 import time
 import re
 import random
-from live_recorder._base_recorder import BaseRecorder
+from ._base_recorder import BaseRecorder
+from .resources import crypto_js
 
 class DouyuRecorder(BaseRecorder):
 
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
-        
         self.liver = 'douyu'
         if self.cookies == None:
             self.dy_did = ''.join(random.sample('1234567890qwertyuiopasdfghjklzxcvbnm', 32))
@@ -66,11 +66,9 @@ class DouyuRecorder(BaseRecorder):
             quality = {}
             self.api_url = "https://www.douyu.com/lapi/live/getH5Play/%s"%roomInfo['room_id']
             
-            with open("../resources/crypto-js.min.js","r", encoding='utf-8') as f:
-                js_code = f.read()
             begin = http_result.text.index("var vdwdae325w_64we")
             end = http_result.text.index("</script>", begin)
-            js_code += '\r\n'
+            js_code = crypto_js + '\r\n'
             js_code += http_result.text[begin:end]
             self.js_code = js_code
             

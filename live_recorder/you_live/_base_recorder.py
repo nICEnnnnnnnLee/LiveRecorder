@@ -3,7 +3,7 @@ import requests
 import os
 import time
 import re
-from live_recorder.flv_checker import Flv
+from .flv_checker import Flv
 
 class BaseRecorder:
 
