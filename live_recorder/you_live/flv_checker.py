@@ -4,8 +4,9 @@ import struct
 
 class Flv(object):
 
-    def __init__(self, path, dest_folder = None):
+    def __init__(self, path, dest_folder = None, debug = False):
         self.path = path
+        self.debug = debug
         if dest_folder != None:
             self.dest_folder = dest_folder.rstrip('\\').rstrip('/')
         else:
@@ -93,7 +94,8 @@ class Flv(object):
                 data = origin.read(3 + dataSize)
                 dest.write(data)
             else:
-                print("未知类型", tagType)
+                if self.debug:
+                    print("未知类型", tagType)
                 dest.truncate(latsValidLength)
                 break
             
@@ -107,7 +109,8 @@ class Flv(object):
             # 间隔十分巨大(1s)，那么重新开始即可
             if timestamp > self.lastTimestampRead[tagType] + 1000:
                 self.lastTimestampWrite[tagType] += 10
-                print("---")
+                if self.debug:
+                    print("---")
             else:
                 self.lastTimestampWrite[tagType] = timestamp - self.lastTimestampRead[tagType] + self.lastTimestampWrite[tagType]
         else:  #如果出现倒序时间戳
@@ -118,7 +121,8 @@ class Flv(object):
                 self.lastTimestampWrite[tagType] = tmp
             else: # 间隔十分巨大，那么重新开始即可
                 self.lastTimestampWrite[tagType] += 10
-                print("---rewind")
+                if self.debug:
+                    print("---rewind")
         self.lastTimestampRead[tagType] = timestamp
  
         # 低于0xffffff部分
@@ -127,11 +131,13 @@ class Flv(object):
         # 高于0xffffff部分
         highCurrenttime = self.lastTimestampWrite[tagType] >> 24
         dest.write(highCurrenttime.to_bytes(1,byteorder='big'))
-        print(" 读取timestamps 为：%s, 写入timestamps 为：%s"%(timestamp, self.lastTimestampWrite[tagType]))
+        if self.debug:
+            print(" 读取timestamps 为：%s, 写入timestamps 为：%s"%(timestamp, self.lastTimestampWrite[tagType]))
     
     
     def changeDuration(self, path, duration):
-        print(duration)
+        if self.debug:
+            print(duration)
         durationHeader = b"\x08\x64\x75\x72\x61\x74\x69\x6f\x6e"
         pointer = 0
         # 先找到 08 64 75 72 61 74 69 6f 6e所在位置
@@ -155,7 +161,8 @@ class Flv(object):
                 file.write(b"\x00")
                 file.write(struct.pack('>d', duration))
             else:
-                print("没有找到duration标签")
+                if self.debug:
+                    print("没有找到duration标签")
         
         
 if __name__ == '__main__':

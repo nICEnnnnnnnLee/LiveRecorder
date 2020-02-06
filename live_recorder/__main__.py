@@ -5,7 +5,7 @@ from live_recorder import version
 args = None
 
 def arg_parser():
-    parser = argparse.ArgumentParser(prog='you-live', description=version.__descriptrion__)
+    parser = argparse.ArgumentParser(prog='you-live', description="version %s : %s"%(version.__version__, version.__descriptrion__))
     parser.add_argument("liver", help="要录制的直播源，如 bili,douyu,kuaishou")
     parser.add_argument("id", help="要录制的房间号，可以从url中直接获取")
     parser.add_argument("-qn", "-q", help="录制的清晰度，可以后续输入", required=False, default=None)
@@ -37,6 +37,7 @@ def main():
     params['file_name_format'] = args.format
     params['time_format'] = args.time_format
     params['cookies'] = args.cookies
+    params['debug'] = args.debug
     if args.cookies_path:
         try:
             with open(args.cookies_path,"r", encoding='utf-8') as f:

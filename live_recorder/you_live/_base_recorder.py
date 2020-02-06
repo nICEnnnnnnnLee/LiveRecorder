@@ -12,7 +12,8 @@ class BaseRecorder:
                  flv_save_folder = None, \
                  delete_origin_file = False, check_flv = True,\
                  file_name_format = "{name}-{shortId} 的{liver}直播{startTime}-{endTime}",\
-                 time_format = "%Y%m%d_%H-%M"):
+                 time_format = "%Y%m%d_%H-%M",\
+                 debug = False):
         self.short_id = str(short_id)
         self.cookies = cookies
         self.delete_origin_file = delete_origin_file
@@ -22,6 +23,7 @@ class BaseRecorder:
         self.flv_save_folder = flv_save_folder
         self.file_name_format = file_name_format
         self.time_format = time_format
+        self.debug = debug
         
         
         
@@ -94,7 +96,7 @@ class BaseRecorder:
             
             if self.check_flv:
                 print("正在校准时间戳")
-                flv = Flv(path, self.flv_save_folder)
+                flv = Flv(path, self.flv_save_folder, self.debug)
                 flv.check()
                 if self.delete_origin_file:
                     os.remove(path)

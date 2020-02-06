@@ -14,8 +14,6 @@ def find_packages(*tops):
     return packages
 
 REQ  =  ['PyExecJS', 'requests']
-packages = setuptools.find_packages()
-print(packages)
 
 setuptools.setup(
     name = "you-live",
