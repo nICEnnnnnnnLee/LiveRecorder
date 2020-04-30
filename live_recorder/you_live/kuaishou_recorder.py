@@ -50,9 +50,9 @@ class KuaishouRecorder(BaseRecorder):
             redPack\\n      liveGuess\\n      expTag\\n      __typename\\n    }\\n    __typename\\n  }\\n}\\n\"\
             }\r\n"%self.short_id
 
-        live_data_json = requests.post(url, timeout=10, headers=headers, data=self.param).json()['data']['liveDetail']['liveStream']
-#         print(user_data_json)
-#         print(live_data_json)
+        live_data_json = requests.post(url, timeout=10, headers=headers, data=self.param).json()['data']['webLiveDetail']['liveStream']
+        print(user_data_json)
+        print(live_data_json)
         
         if live_data_json['playUrls']:
             roomInfo['live_status'] = '1'
@@ -65,7 +65,7 @@ class KuaishouRecorder(BaseRecorder):
         else:
             roomInfo['live_status'] = '0'
             
-        if user_data_json['id'] != None:
+        if user_data_json != None and user_data_json['id'] != None:
             roomInfo['room_owner_id'] = user_data_json['userId']
             roomInfo['room_owner_name'] = user_data_json['name']
             roomInfo['room_description'] = user_data_json['description']
@@ -87,7 +87,7 @@ class KuaishouRecorder(BaseRecorder):
             print('当前没有在直播')
             return None
         
-        live_data_json = requests.post("https://live.kuaishou.com/graphql", timeout=10, headers=self.headers, data=self.param).json()['data']['liveDetail']['liveStream']
+        live_data_json = requests.post("https://live.kuaishou.com/graphql", timeout=10, headers=self.headers, data=self.param).json()['data']['webLiveDetail']['liveStream']
         self.live_url = live_data_json['playUrls'][qn]['url']
         self.live_qn = qn
         print("申请清晰度 %s的链接，得到清晰度 %d的链接"%(qn, self.live_qn))
