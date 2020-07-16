@@ -6,7 +6,7 @@ args = None
 
 def arg_parser():
     parser = argparse.ArgumentParser(prog='you-live', description="version %s : %s"%(version.__version__, version.__descriptrion__))
-    parser.add_argument("liver", help="要录制的直播源，如 bili,douyu,kuaishou")
+    parser.add_argument("liver", help="要录制的直播源，如 bili,douyu,kuaishou,acfun")
     parser.add_argument("id", help="要录制的房间号，可以从url中直接获取")
     parser.add_argument("-qn", "-q", help="录制的清晰度，可以后续输入", required=False, default=None)
     parser.add_argument("-debug", help="debug模式", required=False, action='store_true', default=False)

@@ -34,7 +34,7 @@ you-live [-h] [-qn QN] [-debug] [-check] [-delete] [-save_path SAVE_PATH] [-chec
 B站/斗鱼/快手 直播视频录制
 
 positional arguments:
-  liver                 要录制的直播源，如 bili,douyu,kuaishou
+  liver                 要录制的直播源，如 bili,douyu,kuaishou,acfun
   id                    要录制的房间号，可以从url中直接获取
 
 optional arguments:
