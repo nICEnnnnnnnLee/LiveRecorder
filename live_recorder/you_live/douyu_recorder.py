@@ -8,10 +8,10 @@ from ._base_recorder import BaseRecorder
 from .resources import crypto_js
 
 class DouyuRecorder(BaseRecorder):
-
+    liver = 'douyu'
+    
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
-        self.liver = 'douyu'
         if self.cookies == None:
             self.dy_did = ''.join(random.sample('1234567890qwertyuiopasdfghjklzxcvbnm', 32))
         else:

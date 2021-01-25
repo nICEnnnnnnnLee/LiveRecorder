@@ -3,10 +3,10 @@ import requests
 from ._base_recorder import BaseRecorder
 
 class KuaishouRecorder(BaseRecorder):
-
+    liver = 'kuaishou'
+    
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
-        self.liver = 'kuaishou'
     
     def getRoomInfo(self):
         roomInfo = {}

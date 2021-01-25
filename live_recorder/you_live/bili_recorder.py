@@ -3,11 +3,11 @@ import requests
 from ._base_recorder import BaseRecorder
 
 class BiliRecorder(BaseRecorder):
-
+    liver = 'bili'
+    
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
         
-        self.liver = 'bili'
     
     def getRoomInfo(self):
         roomInfo = {}

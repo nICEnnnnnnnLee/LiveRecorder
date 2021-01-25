@@ -5,11 +5,11 @@ import json
 from ._base_recorder import BaseRecorder
 
 class AcfunRecorder(BaseRecorder):
-
+    liver = 'acfun'
+    
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
         
-        self.liver = 'acfun'
     
     def getRoomInfo(self):
         roomInfo = {}

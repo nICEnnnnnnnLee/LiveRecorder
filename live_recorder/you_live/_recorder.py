@@ -1,18 +1,17 @@
 # coding=utf-8
-from .douyu_recorder import DouyuRecorder
-from .bili_recorder import BiliRecorder
-from .kuaishou_recorder import KuaishouRecorder
-from .acfun_recorder import AcfunRecorder
+import sys
+
+recorders = {}
+module = sys.modules[__name__[:-10]]
+
+for clazzName in dir(module):
+    if 'Recorder' in clazzName and not 'Recorder' == clazzName:
+        clazz = getattr(module, clazzName)
+        liver = getattr(clazz, "liver")
+        recorders[liver] = clazz
 
 def createRecorder(liver, short_id, **args):
-    if liver == 'bili':
-        recorder = BiliRecorder(short_id, **args)
-    elif liver == 'douyu':
-        recorder = DouyuRecorder(short_id, **args)
-    elif liver == 'kuaishou':
-        recorder = KuaishouRecorder(short_id, **args)
-    elif liver == 'acfun':
-        recorder = AcfunRecorder(short_id, **args)
+    if liver in recorders:
+        return recorders[liver](short_id, **args)
     else:
-        recorder = None
-    return recorder
+        return None
