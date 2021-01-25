@@ -82,8 +82,9 @@ class BaseRecorder:
                 for data in response.iter_content(chunk_size=1024*1024):
                     if not self.downloadFlag:
                         break
-                    file.write(data)
-                    self.downloaded += len(data)
+                    if data:
+                        file.write(data)
+                        self.downloaded += len(data)
                 response.close()
             
             if '{endTime}' in path:
