@@ -4,11 +4,11 @@ import execjs
 import time
 import re
 import random
-from ._base_recorder import BaseRecorder
+from ._base_recorder import BaseRecorder, recorder
 from .resources import crypto_js
 
+@recorder(liver = 'douyu')
 class DouyuRecorder(BaseRecorder):
-    liver = 'douyu'
     
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)

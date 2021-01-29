@@ -1,9 +1,9 @@
 # coding=utf-8
 import requests
-from ._base_recorder import BaseRecorder
+from ._base_recorder import BaseRecorder, recorder
 
+@recorder(liver = 'bili')
 class BiliRecorder(BaseRecorder):
-    liver = 'bili'
     
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)

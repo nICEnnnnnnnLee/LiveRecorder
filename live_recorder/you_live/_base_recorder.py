@@ -5,6 +5,17 @@ import time
 import re
 from .flv_checker import Flv
 
+recorders = {}
+
+
+def recorder(liver):
+    assert liver != None
+    def clazz(cls):
+        recorders[liver] = cls
+        cls.liver = liver
+        return cls   
+    return clazz 
+
 class BaseRecorder:
 
     def __init__(self, short_id, cookies = None, \

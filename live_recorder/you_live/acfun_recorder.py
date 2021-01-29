@@ -2,10 +2,10 @@
 import requests
 import re
 import json
-from ._base_recorder import BaseRecorder
+from ._base_recorder import BaseRecorder, recorder
 
+@recorder(liver = 'acfun')
 class AcfunRecorder(BaseRecorder):
-    liver = 'acfun'
     
     def __init__(self, short_id, **args):
         BaseRecorder.__init__(self, short_id, **args)
