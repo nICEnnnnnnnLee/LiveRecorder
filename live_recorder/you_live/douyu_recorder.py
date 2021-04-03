@@ -64,7 +64,8 @@ class DouyuRecorder(BaseRecorder):
         
         if roomInfo['live_status'] == '1':
             quality = {}
-            self.api_url = "https://www.douyu.com/lapi/live/getH5Play/%s"%roomInfo['room_id']
+            #self.api_url = "https://www.douyu.com/lapi/live/getH5Play/%s"%roomInfo['room_id']
+            self.api_url = "https://playweb.douyu.com/lapi/live/getH5Play/%s"%roomInfo['room_id']
             
             begin = http_result.text.index("var vdwdae325w_64we")
             end = http_result.text.index("</script>", begin)
