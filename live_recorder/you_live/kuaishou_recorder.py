@@ -56,7 +56,7 @@ class KuaishouRecorder(BaseRecorder):
         
         if live_data_json['playUrls']:
             roomInfo['live_status'] = '1'
-            roomInfo['room_title'] = live_data_json['caption']
+            roomInfo['room_title'] = live_data_json.get('caption', '空')
             roomInfo['live_rates'] = {}
             i = 0
             for rate in live_data_json['playUrls']:
