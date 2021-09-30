@@ -32,7 +32,7 @@ class Flv(object):
                 # 处理Tag内容
                 self.checkTag(origin, dest)
         
-        self.changeDuration(self.path, float(self.lastTimestampWrite[b'\x08']) / 1000)    
+        self.changeDuration(path_new, float(self.lastTimestampWrite[b'\x08']) / 1000)    
 
     def checkTag(self, origin, dest):
         currentLength = 9
