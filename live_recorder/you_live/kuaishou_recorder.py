@@ -43,7 +43,7 @@ class KuaishouRecorder(BaseRecorder):
         room_json = self.getLiveInfo()
         live_data_json = room_json["liveStream"]
         user_data_json = room_json["author"]
-        if live_data_json and "playUrls" in live_data_json:
+        if live_data_json and live_data_json["playUrls"]:
             roomInfo['live_status'] = '1'
             roomInfo['room_title'] = live_data_json.get('caption', '空')
             roomInfo['live_rates'] = {}
