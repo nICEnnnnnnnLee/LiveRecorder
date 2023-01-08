@@ -81,7 +81,7 @@ class BaseRecorder:
                 filename = filename.replace("{seq}", '0')
                 current_time = time.strftime(self.time_format, time.localtime())
                 filename = filename.replace("{startTime}", current_time)
-                filename = re.sub(r"[\/\\\:\?\"\<\>\|']", '_', filename)
+                filename = re.sub(r"[\/\\\:\?\"\<\>\|\t']", '_', filename)
                 
                 if not os.path.exists(self.save_folder):
                     os.makedirs(self.save_folder)
