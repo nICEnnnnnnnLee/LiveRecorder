@@ -29,7 +29,7 @@ class KuaishouRecorder(BaseRecorder):
         json_raw = searchObj.group(1)
         #print(json_raw)
         json_str = json_raw
-        return json.loads(json_str)["liveroom"]
+        return json.loads(json_str)["liveroom"]["playList"][0]
 
     def getRoomInfo(self):
         roomInfo = {}
