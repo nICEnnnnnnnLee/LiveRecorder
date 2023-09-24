@@ -40,6 +40,7 @@ positional arguments:
 optional arguments:
   -h, --help            show this help message and exit
   -qn QN, -q QN         录制的清晰度，可以后续输入
+  -only_url, -ou        仅输出录制链接，然后退出
   -debug                debug模式
   -check                校准时间戳
   -delete, -d           删除原始文件
@@ -78,9 +79,9 @@ Here’s the guide for [Node.js installation](https://github.com/nodesource/dist
 ### Example2
 Record a live from <https://live.kuaishou.com/u/ZFYS8888>, speicify the file name you want.
 ```
-you-live -format "{name}-{shortId} 的{liver}直播{startTime}" kuaishou ZFYS8888
+you-live -format "{name}-{shortId} 的{liver}直播{startTime}" -cookies "clientid=3; did=web_0000000000000000000000000000000; client_key=00000000; xxx=xxx; ..." kuaishou ZFYS8888
 ```
-**Notice**:You may need cookies(may not logged-in, just skip the captha test) to get room detail information
+**Notice**:You must need cookies(may not logged-in, just skip the captha test) to get room detail information
 
 
 ## :dolphin:LICENSE
