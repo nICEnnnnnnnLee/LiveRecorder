@@ -9,6 +9,7 @@ def arg_parser():
     parser.add_argument("liver", help="要录制的直播源，如 bili,douyu,kuaishou,acfun")
     parser.add_argument("id", help="要录制的房间号，可以从url中直接获取")
     parser.add_argument("-qn", "-q", help="录制的清晰度，可以后续输入", required=False, default=None)
+    parser.add_argument("-only_url", "-ou", help="仅输出录制链接，然后退出", required=False, action='store_true', default=False)
     parser.add_argument("-debug", help="debug模式", required=False, action='store_true', default=False)
     parser.add_argument("-check", help="校准时间戳", required=False, action='store_true', default=False)
     parser.add_argument("-delete", '-d', help="删除原始文件", required=False, action='store_true', default=False)
@@ -62,6 +63,10 @@ def main():
             qn = input("输入要录制的清晰度\r\n")
              
         live_url = recorder.getLiveUrl(qn = qn) 
+        if args.only_url:
+            print("以下为录制链接：")
+            print(live_url)
+            exit(0)
         if debug:
             print(live_url)
         download_thread = you_live.DownloadThread(recorder)
