@@ -28,7 +28,7 @@ class KuaishouRecorder(BaseRecorder):
         searchObj = re.search("window\\.__INITIAL_STATE__ *= *(\\{.*?\\}) *; *\\(function\\(\\)", html)
         json_raw = searchObj.group(1)
         #print(json_raw)
-        json_str = json_raw
+        json_str = json_raw.replace("undefined", "null")
         return json.loads(json_str)["liveroom"]["playList"][0]
 
     def getRoomInfo(self):
