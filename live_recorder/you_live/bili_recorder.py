@@ -13,7 +13,7 @@ class BiliRecorder(BaseRecorder):
         roomInfo = {}
         roomInfo['short_id'] = self.short_id
         
-        url = "https://api.live.bilibili.com/room/v1/Room/get_info?id=%s&from=room"%self.short_id
+        url = "https://api.live.bilibili.com/room/v1/Room/get_info?room_id=%s"%self.short_id
         headers = {
             'Accept': 'application/json, text/plain, */*',
             #'Accept-Encoding': 'gzip, deflate, br',
@@ -23,7 +23,7 @@ class BiliRecorder(BaseRecorder):
             'X-Requested-With': 'ShockwaveFlash/28.0.0.137',
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:68.0) Gecko/20100101 Firefox/68.0',
         }
-        data_json = requests.get(url, timeout=10, headers=headers).json()['data']
+        data_json = requests.get(url, timeout=10, headers={}).json()['data']
         roomInfo['room_id'] = str(data_json['room_id'])
         roomInfo['live_status'] = str(data_json['live_status'])
         roomInfo['room_title'] = data_json['title']
