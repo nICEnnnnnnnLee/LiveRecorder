@@ -43,12 +43,12 @@ class KuaishouRecorder(BaseRecorder):
         room_json = self.getLiveInfo()
         live_data_json = room_json["liveStream"]
         user_data_json = room_json["author"]
-        if live_data_json and live_data_json["playUrls"]:
+        if live_data_json and ("h264" in live_data_json["playUrls"]) and ("adaptationSet" in live_data_json["playUrls"]["h264"]):
             roomInfo['live_status'] = '1'
             roomInfo['room_title'] = live_data_json.get('caption', '空')
             roomInfo['live_rates'] = {}
             i = 0
-            for rate in live_data_json['playUrls'][0]["adaptationSet"]["representation"]:
+            for rate in live_data_json['playUrls']["h264"]["adaptationSet"]["representation"]:
                 key = int(rate["id"])
                 roomInfo['live_rates'][key] = rate['name']
                 i += 1
@@ -72,7 +72,7 @@ class KuaishouRecorder(BaseRecorder):
             return None
         
         live_data_json = self.getLiveInfo()
-        self.live_url = live_data_json["liveStream"]['playUrls'][0]["adaptationSet"]["representation"][qn]['url']
+        self.live_url = live_data_json["liveStream"]['playUrls']["h264"]["adaptationSet"]["representation"][qn]['url']
         self.live_qn = qn
         print("申请清晰度 %s的链接，得到清晰度 %d的链接"%(qn, self.live_qn))
 #         self.download_headers = {
